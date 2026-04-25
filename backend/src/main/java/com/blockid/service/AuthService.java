@@ -23,7 +23,6 @@ public class AuthService {
 
     // REGISTER
     public String register(String username, String password) {
-
         if (userRepository.findByUsername(username).isPresent()) {
             throw new RuntimeException("Username already exists");
         }
@@ -38,9 +37,8 @@ public class AuthService {
         return "User registered";
     }
 
-    //  LOGIN
+    // LOGIN
     public String login(String username, String password) {
-
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -48,7 +46,7 @@ public class AuthService {
             throw new RuntimeException("Invalid password");
         }
 
-        //  RETURN JWT TOKEN
-        return jwtUtils.generateToken(username);
+        // ✅ IMPORTANT FIX (ADD ROLE HERE)
+        return jwtUtils.generateToken(user.getUsername(), user.getRole());
     }
 }

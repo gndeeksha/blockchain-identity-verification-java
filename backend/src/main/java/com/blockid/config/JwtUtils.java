@@ -15,17 +15,18 @@ public class JwtUtils {
     @Value("${jwt.expiration}")
     private long expiration;
 
-    //  Generate token
-    public String generateToken(String username) {
+    // ✅ UPDATED: pass role also
+    public String generateToken(String username, String role) {
         return Jwts.builder()
                 .setSubject(username)
+                .claim("role", role) // ⭐ VERY IMPORTANT
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();
     }
 
-    //  Extract username
+    // Extract username
     public String extractUsername(String token) {
         return Jwts.parser()
                 .setSigningKey(secret)
@@ -34,7 +35,16 @@ public class JwtUtils {
                 .getSubject();
     }
 
-    //  Validate token
+    // Extract role ✅
+    public String extractRole(String token) {
+        return (String) Jwts.parser()
+                .setSigningKey(secret)
+                .parseClaimsJws(token)
+                .getBody()
+                .get("role");
+    }
+
+    // Validate token
     public boolean validateToken(String token) {
         try {
             Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
