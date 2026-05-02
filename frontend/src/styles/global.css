@@ -1,0 +1,157 @@
+/* --- Clean Orange & White Theme --- */
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #ffffff;
+  color: #1a1a1a;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+h2,
+h3 {
+  color: #fb8c00;
+  text-transform: uppercase;
+}
+
+/* --- Card Structure Fix --- */
+.verify-box,
+.record-card,
+.block {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Pushes Badge to the RIGHT end */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 10px;
+}
+
+/* Hash Styling - Clean & Spaced */
+.hash-container {
+  background: #fff9f0;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 10px 0;
+  border: 1px solid #ffe0b2;
+}
+
+.hash-label {
+  font-size: 11px;
+  font-weight: bold;
+  color: #e65100;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.hash-value {
+  font-family: monospace;
+  font-size: 13px;
+  word-break: break-all;
+  color: #333;
+}
+
+/* Status Styles */
+.status-approved {
+  background-color: #fb8c00;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.status-pending {
+  background-color: #ffe0b2;
+  color: #e65100;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Inputs & Buttons */
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0 20px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #fb8c00;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.chain-link {
+  font-size: 40px;
+  color: #fb8c00;
+  margin: -10px 0 20px 0;
+  text-align: center;
+}
+/* --- Add this to your existing global.css or update the audit-table section --- */
+
+.table-container {
+  background-color: #ffffff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.audit-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.audit-table th {
+  text-align: left;
+  padding: 20px; /* Increased padding for space */
+  background-color: #fff9f0;
+  color: #e65100;
+  border-bottom: 2px solid #fb8c00;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.audit-table td {
+  padding: 20px; /* Increased padding for space */
+  border-bottom: 1px solid #f1f1f1;
+  font-size: 15px;
+  color: #333;
+}
+
+.audit-table tr:hover {
+  background-color: #fffdfa;
+}
+
+/* Ensure the status badges have enough space inside cells */
+.status-approved,
+.status-pending {
+  display: inline-block;
+  min-width: 80px;
+  text-align: center;
+}

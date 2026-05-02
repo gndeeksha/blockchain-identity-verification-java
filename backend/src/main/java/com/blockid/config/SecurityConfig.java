@@ -55,11 +55,12 @@
 //    }
 //}
 
+
 package com.blockid.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer; // Import this
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
@@ -79,14 +80,16 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
-                // ✅ Change this line to Customizer.withDefaults()
-                // This will automatically find the bean in your CorsConfig.java
                 .cors(Customizer.withDefaults())
 
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/api/identity/all").hasRole("ADMIN")
+                        // ✅ ADDED: Allows anyone to use the Verify page (no login required)
+                        .requestMatchers("/api/identity/verify").permitAll()
+                        // ✅ CHANGED: Allows both USER and ADMIN to see the Explorer (all identities)
+                        .requestMatchers("/api/identity/all").hasAnyRole("USER", "ADMIN")
+
                         .requestMatchers("/api/identity/approve/**").hasRole("ADMIN")
                         .requestMatchers("/api/identity/submit").hasAnyRole("USER", "ADMIN")
                         .anyRequest().authenticated()
@@ -95,9 +98,6 @@ public class SecurityConfig {
 
         return http.build();
     }
-
-    // ❌ DELETE the corsConfigurationSource() bean from this file entirely
-    // Because it is already in your CorsConfig.java file.
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
